@@ -1,25 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {  useContext } from "react";
+import "./components/Style/Home.css";
+import { AppContext } from "./Context";
+// import ComA from "./ComA";
+import Nav from "./components/Nav";
+// import Details from "./components/Details";
+import Cryptolist from "./components/Cryptolist";
+import HomePage from "./components/HomePage";
+import Footer from "./components/Footer";
+import CryptoDetails from "./components/CryptoDetails";
+import Marketcap from "./components/Marketcap";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
+  const { isLoading, marketData } = useContext(AppContext);
+
+  // console.log(marketData);
+  // if (isLoading) return <div>Loading Data</div>;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="main">
+        <Nav />
+        <div className="rside">
+          <div>
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <HomePage isLoading={isLoading} marketData={marketData} />
+                }
+              />
+              <Route
+                exact
+                path="/cryptocurrencies"
+                element={<Cryptolist coins={marketData?.coins} />}
+              />
+              <Route
+                exact
+                path="/marketcap"
+                element={<Marketcap data={marketData?.stats} />}
+              />
+              <Route exact path="/:coinId" element={<CryptoDetails />} />
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+      </div>
+    </>
   );
-}
+};
 
+// export { Data };
 export default App;
