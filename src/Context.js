@@ -6,9 +6,14 @@ const Context = ({children}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [iscLoading, setcIsLoading] = useState(true);
     const [coinId,setCoinId]=useState(null);
+    const [isLogin,setIsLogin] =useState(true);
+    const [cartView,setCartView]=useState(false);
+    const [finalAmount,setFinalAmount]=useState(0);
+    const [cart,setCart]=useState([])
     const setId=(val)=>{
         setCoinId(val)
     }
+    const fixed=(num)=>{return(parseFloat(num).toFixed(2))}
   useEffect(() => {
     const options = {
       method: "GET",
@@ -29,6 +34,7 @@ const Context = ({children}) => {
         .finally(() => setIsLoading(false));
     };
     getMarket();
+    
     if(coinId){
         setcIsLoading(true);
     fetch(`https://coinranking1.p.rapidapi.com/coin/${coinId}?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h`, options)
@@ -39,7 +45,7 @@ const Context = ({children}) => {
     
   }, [coinId]);
  return(
-    <AppContext.Provider value={{marketData,iscLoading,isLoading,setId,coinData}}>{children}</AppContext.Provider>)
+    <AppContext.Provider value={{marketData,iscLoading,isLoading,setId,coinData,isLogin,setIsLogin,cartView,setCartView,finalAmount,setFinalAmount,cart,setCart,fixed}}>{children}</AppContext.Provider>)
  
 };
 

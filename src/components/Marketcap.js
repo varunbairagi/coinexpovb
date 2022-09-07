@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import millify from "millify";
 import { AppContext } from "../Context";
 
+
 const Marketcap = (props) => {
   const { marketData } = useContext(AppContext);
   const {

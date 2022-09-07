@@ -8,14 +8,19 @@ import parse from "html-react-parser";
 
 const CryptoDetails = () => {
   let { coinId } = useParams();
-  const { setId, coinData, iscLoading } = useContext(AppContext);
+  const { setId, coinData, iscLoading,fixed ,isLogin,cart,setCart
+  } = useContext(AppContext);
   setId(coinId);
-
+  const setVal=()=>{
+    
+  }
+  
+    
   // const [coinData,setCoinData] =useState();
 
   //  setIds(coinId)
   // console.log(iscLoading)
-  // console.log(coinData)
+  console.log(coinData)
 
   return (
     <>
@@ -24,12 +29,14 @@ const CryptoDetails = () => {
       ) : (
         <>
           <div className="detailscont">
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center" ,marginTop:"20px"}}>
               <h2>{`${coinData.name} (${coinData.symbol}) Price`}</h2>
               <h5>
                 {coinData.name} price in US Dollar (USD). View value statistics,
                 market cap and supply.
               </h5>
+              {!isLogin&&
+                <button style={{ margin: "5px",fontSize:".8rem" }} onClick={setVal}>Buy Now</button>}
             </div>
             <div className="det">
               <div className="valueSt">
@@ -40,7 +47,7 @@ const CryptoDetails = () => {
                 </p>
                 <div className="tof mg pd">
                   <div className="fx">
-                    <h4>Price to USD</h4> <h3>{millify(coinData.price)}</h3>
+                    <h4>Price to USD</h4> <h3>$ {fixed(coinData.price)}</h3>
                   </div>
                   <div className="fx">
                     <h4>Rank</h4> <h3>{coinData.rank}</h3>

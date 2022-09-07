@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AppContext } from "../Context";
-
 import Coins from "./Coins";
 const Cryptolist = () => {
   const { marketData } = useContext(AppContext);
@@ -13,7 +12,7 @@ const Cryptolist = () => {
        
         <div className="list">
           {marketData?.coins?.map((el, i) => {
-            return <Coins Values={el} key={i} id={el.uuid} />;
+            return <Coins Values={el} key={i} id={i} />;
           })}
         </div>
       </div>
